@@ -30,7 +30,6 @@ from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from termcolor import colored
-from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 
 import base64
@@ -450,15 +449,8 @@ def signupUser(request):
     print(colored(d, 'red'))
     return JsonResponse(d)
 
-
-def app_render(request):
-    print(settings.BASE_DIR)
-    d = {'title': 'Visor DICOM', 'info': 'RENDER LATERAL DEL SERVIDOR DICOM'}
-    return render(request, "chat/dicom.html", d)
-
 class Error404View(TemplateView):
     template_name = "error/error_404.html"
-
 
 class Custom500View(TemplateView):
     template_name = "error/error_500.html"
