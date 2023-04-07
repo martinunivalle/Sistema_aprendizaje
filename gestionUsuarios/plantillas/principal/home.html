@@ -1,0 +1,22 @@
+{% extends "principal/base.html" %}
+
+{% block title %} INICIO {% endblock %}
+
+{% block content %}
+
+<h3 style="color: red;">
+    ANUNCIOS DE APRENDIZAJE PARA LOS COLABORADORES-UNIVALLE
+</h3>
+
+<p><strong>¡ Realice sus comunicados de correo electrónico con el instructor!</strong></p>
+<p>Se podrán crear mensajes con la información deseada, luego seleccionar los destinatarios ( Colaboradores, instructores o personal administrativo) y el mensaje les será enviado automáticamente a sus correos electrónicos.</p>
+<p><strong>Evite que sus mensajes se vayan a la carpeta de SPAM</strong></p>
+<p>El envío masivo de correos electrónicos se realiza utilizando proveedores especialistas y es construido utilizando las mejores prácticas para evitar al máximo que el mensaje termine en la carpeta de SPAM.</p>
+<p><strong>Evite que sus mensajes se vayan a la carpeta de SPAM</strong></p>
+<p>Se podrán crear plantillas personalizadas y reutilizarlas las veces que se desee en diversos correos electrónicos.</p>
+<div class="d-flex justify-content-center">
+    {% if not request.user.is_authenticated %}
+    <a class="btn btn-primary center" href="{% url 'login' %}"> ENTRAR </a>
+    {%endif%}
+</div>
+{% endblock %}

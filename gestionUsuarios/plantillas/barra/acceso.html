@@ -1,0 +1,42 @@
+{% load static %}
+<div class="card-header" style="background-color:blue;color: white;">
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <nav class="navbar-expand-sm navbar-dark">
+                <nav class="text-white">
+                    <button type="button" class="navbar-toggler btn-sm" data-toggle="collapse" data-target="#menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="menu">
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link menu-icon fa fa-bullhorn btn-lg" href="{% url 'inicio' %}"> Anuncios</a>
+                            </li>
+                            {% if request.user.is_authenticated %}
+                            <li class="nav-item active">
+                                <a class="nav-link menu-icon fa fa-tasks btn-lg" href="{% url 'landing_page' %}"> Sala de aprendizaje</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link fa fa-calendar btn-lg" href="{% url 'calendar' %}"> Calendario</a>
+                            </li>
+                            {%endif%}
+                        </ul>
+                    </div>
+                </nav>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!------------------------------------
+					MENSAJES
+-------------------------------------->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="notification {{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}

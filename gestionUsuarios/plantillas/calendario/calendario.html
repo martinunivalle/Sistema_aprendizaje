@@ -1,0 +1,23 @@
+{% extends "principal/base.html" %}
+{% load humanize %}
+{% load static %}
+{% block title %} CALENDARIO {% endblock %}
+
+{% block content %}
+    <ul class="main">
+        <div class="card card-nav-tabs card-plain">
+            <div class="clearfix">
+                <span class="left m-1" style="font-size: 20px;">BIENVENIDO, {{ request.user.name }}</span>
+                <a class="btn btn-info right mr-1" href="{% url 'calendar' %}?{{ next_month }} "> MES SIGUIENTE >> </a>
+                <a class="btn btn-info right mr-1" href="{% url 'calendar' %}?{{ prev_month }}"> << MES ANTERIOR </a>
+                <a class="btn btn-info right mr-1" href="{% url 'event_new' %}"> + EVENTO NUEVO </a>
+                
+            </div>
+            <p style= "background-color:rgb(255, 0, 0); color: rgb(255, 255, 255); text-align: center;">CALENDARIO</p>
+            <table class="table table-bordered">
+                {% csrf_token %}
+                {{ calendar }}
+             </table>
+        </div>
+    </ul>
+{% endblock %}

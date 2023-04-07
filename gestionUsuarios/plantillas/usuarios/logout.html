@@ -1,0 +1,23 @@
+{% extends "principal/base.html" %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% load static %}
+{% block title %} Salida{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <p style="background-color:red; color: white; text-align: center;">VUELVA PRONTO</p>
+                <h1 style="text-align: center;">TE HAS SALIDO.</h1>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-primary center" href="{% url 'login' %}"> ENTRAR </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

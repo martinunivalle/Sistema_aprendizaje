@@ -1,0 +1,54 @@
+<!DOCTYPE html> {% load static %}
+<html lang="es">
+
+<head>
+    <!-------------------------------------
+					TITULO
+	-------------------------------------->
+    <title>INDEX </title>
+    <!-- Requerimientos de configuracion-->
+    <meta charset="utf-8">
+    <!-- Bootstrap CSS -->
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Varela+Round' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <!-- Add additional CSS in static file -->
+</head>
+
+<body>
+    <h1 style="background-color:white; color: red; text-align: left;">
+        <img src="{% static 'univalle.png' %}" width="50" height="71"> HERRAMIENTA TECNOLOGICA PARA EL APRENDIZAJE - UNIVALLE
+    </h1>
+    <div class="box">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card w-75" style="width: 12rem;">
+                    <img class="card-img-top" src="{% static 'paciente.png' %}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">COLABORADOR</h5>
+                        <p class="card-text">Si eres aprendiz ingresa aqui.</p>
+                        <a href="/landing_page" class="btn btn-primary">ENTRAR</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card w-75" style="width: 12rem;">
+                    <img class="card-img-top" src="{% static 'medico.png' %}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">INSTRUCTOR</h5>
+                        <p class="card-text">Si eres instructor ingresa aqui.</p>
+                        <a href="/login" class="btn btn-primary">ENTRAR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <h6 style="text-align: right;">Plataforma de aprendizaje</h6>
+        <p style="background-color:blue; color: white; text-align: center;">Gracias por su visita</p>
+        <h5 style="background-color:null; color: black; text-align: center;">Herramienta tecnológica realizada en
+            Django<br>hecha para: Empresa de dispositivos médicos<br>Diseñada por Jeniffer Cardona FDZ</h5>
+    </footer>
+</body>
+
+</html>

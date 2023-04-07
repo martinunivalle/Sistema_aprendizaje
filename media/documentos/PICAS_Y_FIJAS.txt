@@ -1,0 +1,158 @@
+Claro, aquí te presento un algoritmo básico para el juego de Picas y Fijas:
+
+Elige un número de 4 dígitos que el jugador debe adivinar.
+
+Pídele al jugador que adivine el número de 4 dígitos.
+
+Compara cada dígito del número del jugador con el número elegido.
+
+Si un dígito coincide en valor y posición con uno en el número elegido, aumenta la variable "fijas" en 1.
+
+Si un dígito coincide en valor pero no en posición, aumenta la variable "picas" en 1.
+
+Continúa pidiéndole al jugador que adivine el número hasta que el número sea adivinado correctamente.
+
+Cuando el número sea adivinado correctamente, muestra el número de intentos que el jugador utilizó para adivinar el número.
+
+Este algoritmo es solo un ejemplo básico de cómo se puede programar el juego de Picas y Fijas en un lenguaje de programación. Sin embargo, existen diversas variaciones y mejoras que se pueden hacer a este algoritmo para hacer el juego más interesante y desafiante. 
+
+_______________________________________________________________
+
+El juego de "Fijas y Picas" es un buen ejemplo de un problema de adivinanza que se puede resolver mediante un algoritmo de inteligencia artificial. Aquí te proporciono algunas sugerencias de cómo podrías utilizar el juego para entrenar a una IA para conocer las probabilidades de un número desconocido:
+
+Recopilar datos: La IA necesitará un conjunto de datos para entrenar y mejorar su capacidad de adivinanza. Por lo tanto, es importante recopilar datos de partidas previas para proporcionar a la IA un conjunto de datos para aprender. Estos datos pueden incluir el número secreto, el número de fijas y picas proporcionados por el jugador que piensa en el número secreto y las adivinanzas realizadas por el jugador o jugadores.
+
+Desarrollar un modelo: Una vez que se hayan recopilado los datos, se puede desarrollar un modelo de aprendizaje automático para que la IA pueda aprender a partir de los datos. El modelo debe ser capaz de tomar en cuenta el número secreto, el número de fijas y picas y las adivinanzas realizadas para poder predecir el número secreto.
+
+Entrenar el modelo: Una vez que se ha desarrollado el modelo, se puede entrenar la IA con los datos recopilados. La IA aprenderá a partir de los datos proporcionados y mejorará su capacidad de adivinanza con el tiempo.
+
+Validar el modelo: Después de entrenar la IA, es importante validar el modelo para asegurarse de que está funcionando correctamente. Esto se puede hacer utilizando un conjunto de datos de validación para comprobar la precisión de las predicciones del modelo.
+
+Optimizar el modelo: Si el modelo no funciona correctamente, se pueden realizar ajustes para optimizar su precisión. Esto puede implicar la inclusión de más datos, cambios en el algoritmo de aprendizaje automático o ajustes en los parámetros del modelo.
+
+Con estos pasos, se puede entrenar una IA para mejorar sus capacidades de adivinanza a través del juego de "Fijas y Picas" y proporcionar predicciones sobre la probabilidad de un número desconocido.
+
+_____________________________________________________________________
+
+#include <stdio.h>
+
+int main()
+{
+    int num_secreto[4] = {1, 2, 3, 4}; // definimos el número secreto
+    int num_jugador[4], fijas = 0, picas = 0, intentos = 0;
+    
+    printf("Bienvenido al juego de Picas y Fijas!\n");
+    
+    do {
+        printf("Ingrese un número de 4 dígitos: ");
+        scanf("%1d%1d%1d%1d", &num_jugador[0], &num_jugador[1], &num_jugador[2], &num_jugador[3]);
+        
+        // Reiniciamos las variables fijas y picas
+        fijas = 0;
+        picas = 0;
+        
+        // Comparamos cada dígito del número del jugador con el número secreto
+        for (int i = 0; i < 4; i++) {
+            if (num_secreto[i] == num_jugador[i]) {
+                fijas++;
+            }
+            else {
+                for (int j = 0; j < 4; j++) {
+                    if (num_secreto[i] == num_jugador[j]) {
+                        picas++;
+                    }
+                }
+            }
+        }
+        
+        // Mostramos los resultados de fijas y picas
+        printf("Fijas: %d, Picas: %d\n", fijas, picas);
+        
+        // Incrementamos el contador de intentos
+        intentos++;
+    } while (fijas < 4);
+    
+    printf("¡Felicitaciones! Adivinaste el número en %d intentos.\n", intentos);
+    
+    return 0;
+}
+
+______________________________________________________________________________
+
+
+Para crear un dataset del juego de Picas y Fijas, puedes seguir los siguientes pasos:
+
+Decidir el tamaño del dataset: Primero, debes decidir cuántas filas de datos deseas incluir en tu dataset. Esto dependerá de tus necesidades y de la cantidad de datos que quieras recolectar.
+
+Definir las variables: En el juego de Picas y Fijas, las variables que necesitas recolectar son el número ingresado por el jugador, la cantidad de fijas y la cantidad de picas. Por lo tanto, debes crear tres columnas en tu dataset para recolectar esta información.
+
+Generar números aleatorios: Para recolectar los datos, necesitarás generar números aleatorios para que los jugadores adivinen. Puedes hacer esto utilizando una función que genere un número aleatorio de 4 dígitos.
+
+Solicitar entrada de datos: Debes solicitar a los jugadores que ingresen su número de adivinanza. Luego, debes comparar el número del jugador con el número generado aleatoriamente para calcular la cantidad de fijas y picas.
+
+Registrar los datos: Una vez que hayas calculado la cantidad de fijas y picas, debes registrar esta información en tu dataset.
+
+Repetir el proceso: Debes repetir el proceso de generación de números aleatorios, entrada de datos y registro de datos para tantas filas como desees en tu dataset.
+
+_______________________________________________________________________________________________
+import random
+
+dataset = []
+
+for i in range(1000):  # Puedes cambiar 1000 por la cantidad de números que desees
+    number = random.randint(0, 9999)  # Puedes cambiar 9999 por el rango de números que desees
+    dataset.append(number)
+
+print(dataset)
+
+-------------------------------------------------
+
+import random
+
+# Generar todas las posibles soluciones
+solutions = []
+for i in range(10):
+    for j in range(10):
+        for k in range(10):
+            for l in range(10):
+                if len(set([i, j, k, l])) == 4:
+                    solutions.append([i, j, k, l])
+
+# Función para calcular las picas y fijas
+def evaluate_guess(guess, answer):
+    picas = 0
+    fijas = 0
+    for i in range(4):
+        if guess[i] == answer[i]:
+            fijas += 1
+        elif guess[i] in answer:
+            picas += 1
+    return (picas, fijas)
+
+# Algoritmo de búsqueda heurística para elegir la próxima jugada
+def choose_next_guess(remaining_solutions):
+    # Evaluación heurística para cada posible solución
+    best_score = float('inf')
+    best_guess = None
+    for guess in remaining_solutions:
+        scores = [0] * len(remaining_solutions)
+        for i in range(len(remaining_solutions)):
+            scores[i] = evaluate_guess(guess, remaining_solutions[i])
+        score = max(scores, key=lambda x: min(x))
+        if score < best_score:
+            best_score = score
+            best_guess = guess
+    return best_guess
+
+# Jugar el juego
+answer = random.sample(range(10), 4)
+remaining_solutions = solutions.copy()
+guesses = []
+while True:
+    guess = choose_next_guess(remaining_solutions)
+    guesses.append(guess)
+    picas, fijas = evaluate_guess(guess, answer)
+    if fijas == 4:
+        print('¡Adiviné la solución en %d intentos!' % len(guesses))
+        break
+    remaining_solutions = [x for x in remaining_solutions if evaluate_guess(x, guess) == (picas, fijas)]

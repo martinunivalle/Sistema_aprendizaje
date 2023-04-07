@@ -1,0 +1,25 @@
+{% extends "principal/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}CONFIRMADO{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="row justify-content-center">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <p style="background-color:red; color: white; text-align: center;"> REINICIO DE CONTRASEÑA</p>
+                <h2 class="font-weight-bold mt-3">Confirmar restablecimiento de contraseña</h2>
+                <hr>
+                <p>Ingrese su nueva contraseña.</p>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-primary" type="submit">Restablecer la contraseña</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

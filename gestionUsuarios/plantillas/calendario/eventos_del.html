@@ -1,0 +1,23 @@
+<!-- templates/article_delete.html -->
+{% extends "principal/base.html" %}
+
+{% block title %}
+BORRAR EVENTO
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <p style="background-color:red; color: white; text-align: center;">BORRAR DATOS DE LA CLASE
+                </p>
+                <form action="" method="post">{% csrf_token %}
+                    <p>Esta seguro que quiere borrar a {{ object.medico.nombre_medico }} {{ object.medico.apellido_medico }} {{ object.paciente.name }} de la cita?</p>
+                    <button class="btn btn-danger ml-2" type="submit">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

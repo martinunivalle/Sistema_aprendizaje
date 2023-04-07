@@ -1,0 +1,245 @@
+<!DOCTYPE html>{% load static %}
+<html lang="es">
+<meta http-eqip="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+    .img-invoice {
+        width: 50px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .head {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    #invoice thead tr th {
+        text-align: left;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+    }
+
+    #invoice thead tr {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    #invoice tbody tr {
+        padding: 0;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <p class="head">
+        {{ comp.title|upper }}<br>
+        {{ comp.hora|upper }}<br>
+    </p>
+
+    <table>
+        <thead>
+            <tr style="border-top: 1px solid black; padding-top: 4px;">
+                <th style="width: 100%">DATOS DEL PACIENTE</th>
+            </tr>
+        </thead>
+        <tr style="border-top: 1px solid black; padding-top: 4px;">
+            <td>
+            </td>
+        </tr>
+    </table>
+
+    <table id="invoice">
+        <tbody>
+            {% for base in historia %}
+            <tr>
+                <td><b>PACIENTE:</b> {{base.paciente_pediatrico.name|upper}}</td>
+                <td>{% if base.paciente_pediatrico.apellidos == NONE %} {% else %}
+                    {{base.paciente_pediatrico.apellidos|upper}}{%endif %}
+                </td>
+                <td>,Identificado(a) con:{{base.paciente_pediatrico.documento}}</td>
+            </tr>
+            <tr>
+                <td><b>TELEFONO:</b> {{base.paciente_pediatrico.phone|upper}}</td>
+                <td><b>FECHA DE NACIMIENTO:</b> {{base.paciente_pediatrico.fecha_nacimiento|upper}}</td>
+                <td><b>TIPO DE SANGRE:</b> {{base.paciente_pediatrico.tipo_sangre|upper}}</td>
+                <td><b>SEXO:</b> {{base.paciente_pediatrico.sexo|upper}}</td>
+            </tr>
+            <tr>
+                <td><b>ESTADO CIVIL:</b> {{base.paciente_pediatrico.estdo_civil|upper}}</td>
+                <td><b>OCUPACION:</b> {{base.paciente_pediatrico.ocupacion|upper}}</td>
+            </tr>
+            <tr>
+                <td><b>ENTIDAD:</b>{{base.entidad}}</td>
+                <td><b>ESTRATO:</b>{{base.estrato}}</td>
+                <td><b>REGIMEN:</b>{{base.regimen}}</td>
+                <td><b>PLAN DE BENEFICIOS:</b>{{base.plan_beneficio}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+
+        {% for base in hist_paciente %}
+        {% if forloop.first %}
+        <tr>
+            <td><b>MEDICO TRATANTE:</b> {{base.historial_medico.nombre_medico|upper}}</td>
+            <td>{% if base.historial_medico.apellido_medico == NONE %} {% else %}
+                {{base.historial_medico.apellido_medico|upper}}{%endif %}
+            </td>
+        </tr>
+        {% endif %}>
+        {% endfor %}
+    </table>
+    <table>
+        <thead>
+            <tr style="border-top: 1px solid black; padding-top: 4px;">
+                <th style="width: 100%">INTERROGATORIO DEL PACIENTE</th>
+            </tr>
+        </thead>
+    </table>
+
+    <table id="invoice">
+        <thead>
+            <tr style="border-top: 1px solid black; padding-top: 4px;">
+                <th style="width: 5%;">ID</th>
+                <th style="width: 20%;">MEDICO TRATANTE</th>
+                <th style="width: 20%;">FECHA DE ALTA DEL PACIENTE</th>
+                <th style="width: 45%;">MOTIVO DE CONSULTA</th>
+                <th style="width: 10%;">FECHA ULTIMA CITA</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for base in hist_paciente %}
+            <tr {% if forloop.first %}style="padding-top: 3px;" {% endif %}>
+                <td class="text-left">{{forloop.counter}}</td>
+                <td>{{base.historial_medico.nombre_medico}} {{base.historial_medico.apellido_medico}}</td>
+                <td>{{base.fecha_alta}}</td>
+                <td>{{base.contenido}}</td>
+                <td>{{base.fecha_ultima_cita}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <table>
+        <thead>
+            <tr style="border-top: 1px solid black; padding-top: 4px;">
+                <th style="width: 100%">ANTECEDENTE DE LOS FAMILIARES</th>
+            </tr>
+        </thead>
+        <tr style="border-top: 1px solid black; padding-top: 4px;">
+            <td>
+            </td>
+        </tr>
+    </table>
+
+    <table class="default">
+        {% for base in m_int_paciente %}
+        <tr>
+            <td><b>EDAD MADRE:</b> {{base.edad_madre|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>OCUPACION DE LA MADRE:</b> {{base.ocupacion_madre|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>ESCOLARIDAD DE LA MADRE:</b> {{base.escolaridad_madre|upper}}</td>
+        </tr>
+        <tr>
+
+            <td><b>ESPECIFIQUE DATOS DE MADRE:</b> {{base.especifique_madre|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>OCUPACION DEL PADRE:</b> {{base.ocupacion_padre|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>ESCOLARIDAD DEL PADRE:</b> {{base.escolaridad_padre|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>TOXICOMANIA DEL PADRE:</b> {{base.toxicomania_padre|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>ESPECIFIQUE DATOS DEL PADRE::</b> {{base.especifique_padre|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>FECHA DE TOMA DE LA HISTORIA:</b> {{base.fecha_toma|upper}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <table>
+        <thead>
+            <tr style="border-top: 1px solid black; padding-top: 4px;">
+                <th style="width: 100%">EXPLORACION DEL PACIENTE </th>
+            </tr>
+        </thead>
+        <tr style="border-top: 1px solid black; padding-top: 4px;">
+            <td>
+            </td>
+        </tr>
+    </table>
+
+    <table class="default">
+        {% for base in m_med_paciente %}
+        <tr>
+            <td><b>PESO:</b> {{base.peso|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>TALLA:</b> {{base.talla|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>TA DIASTOLICA:</b> {{base.ta_diastolica|upper}}</td>
+        </tr>
+        <tr>
+
+            <td><b>TA SISTOLICA:</b> {{base.ta_sistolica|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>PRESION ARTERIAL:</b> {{base.presion_arterial|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>TEMPERATURA:</b> {{base.temperatura|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>OXIGENOMETRIA:</b> {{base.oxigenometria|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>GLUCOMETRIA:</b> {{base.glucometria|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>MOTIVO DE CONSULTA:</b> {{base.estado_paciente|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>EXAMEN VISUAL DEL PACIENTE:</b> {{base.examen_visual|upper}}</td>
+        </tr>
+        <tr>
+            <td><b>EXAMEN NEUROLOGICO DEL PACIENTE:</b> {{base.examen_neurologico|upper}}</td>
+        </tr>
+        {% endfor %}
+        <tr style="border-top: 1px solid black; padding-top: 4px;">
+            <td>
+            </td>
+        </tr>
+    </table>
+
+    <table style="margin-top: 250px;">
+        <thead>
+
+            <tr>
+                <th>****SISTEMA DE TELEMEDICINA****</th>
+            </tr>
+            <tr>
+                <th>Aplicacion telemedicina con Django</th>
+            </tr>
+            <tr>
+                <th>Gracias por su visita</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+
+</html>

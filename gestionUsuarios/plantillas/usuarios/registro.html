@@ -1,0 +1,30 @@
+{% extends "principal/base.html" %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% load static %}
+{% block title %} Entrada {% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    <p style="background-color:blue; color: white; text-align: center;">REGISTRO DE
+                        USUARIOS
+                    </p>
+                    {% if form.errors %}
+                    <div class="alert alert-danger" role="alert"> ERROR </div>
+                    {% endif %}
+                    <div>
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <button type="submit" class="btn btn-info right">REGISTRARSE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

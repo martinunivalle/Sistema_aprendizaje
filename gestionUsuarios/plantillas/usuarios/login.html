@@ -1,0 +1,35 @@
+{% extends "principal/base.html" %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% load static %}
+{% block title %} Entrada {% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    <p style="background-color:red; color: white; text-align: center;"> LOGIN DE USUARIOS
+                    </p>
+                    {% if form.errors %}
+                    <div class="alert alert-danger" role="alert"> ERROR DE FORMULARIO </div>
+                    {% endif %}
+                    <table class="form form-table">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <script src='https://www.google.com/recaptcha/api.js'></script>
+                        <div class="g-recaptcha" data-sitekey="6Le9fpsbAAAAAIw0kLxB8P2Vsa1mFJkmTo4nT3vE">
+                        </div>
+                        <p><a href="{% url 'password_reset' %}">¿Olvidó su contraseña?</a><br></p>
+                        <p style="color:red;">¿No tienes una cuenta? <a href="{% url 'registro' %}">Registrarse</p>
+                        <button type="submit" class="btn btn-info right"> ENTRAR </button>
+                       </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

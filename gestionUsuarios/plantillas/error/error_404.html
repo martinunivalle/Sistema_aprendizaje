@@ -1,0 +1,14 @@
+{% extends "principal/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %} ERROR 505{% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <h2 class="display-4">ERROR 404</h2>
+    <h4 class="display-4">PAGINA NO ENCONTRADA </h4>
+    <p class="lead">Lo sentimos, esta pagina esta perdida o no existe. </p>
+    <img src="{% static 'error.png' %}" width="100" height="130 ">
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" href="{% url 'inicio'%}" role="button">Inicio</a>
+</div>
+{% endblock %}

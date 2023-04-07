@@ -1,0 +1,92 @@
+{% extends "principal/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}DETALES DEL EVENTO{% endblock %}
+
+{% block content %}
+<ul class="main">
+    <div class="container">
+        <div class="card card-nav-tabs card-plain">
+            <div class="clearfix">
+                <a class="btn btn-primary left" href="{% url 'calendar' %}"> Calendario </a>
+                {% if event.cita_cumplida == True %}
+                <a class="btn btn-warning left" href="{% url 'factura'  %}"> Facturar </a>
+                {% endif %} 
+                <a class="btn btn-primary right" href="{% url 'event_edit' event.pk %}"> Editar clase </a>
+                <a class="btn btn-danger right" href="{% url 'remove' event.id %}">Borrar clase</a>
+            </div>
+            <div class="clearfix">
+                <p style="background-color:rgb(255, 0, 0); color: rgb(255, 255, 255); text-align: center;">DATOS DE LA
+                    CLASE
+                </p>
+                <h5>Titulo: {{ event.Titulo }}</h5>
+                <p>Desde <span style="color: black;">{{ event.Tiempo_inicial }}</span> Hasta <span
+                        style="color: black;">{{ event.Tiempo_final }}</span></p>
+                <hr>
+                <h5>Descripcion: {{ event.Descripcion }}</h5>
+                {% if event.cita_cumplida == True %}
+                <h5>Clase realizada :<i class="fa fa-check" aria-hidden="true"></i></h5>
+                {% else %}
+                <h5>Clase No realizada :<i class="fa fa-times" aria-hidden="true"></i></h5>
+                {% endif %}                
+            </div>
+            <hr>
+            <div class="clearfix">
+                <h4 class="left">Instructor</h4>
+                <a class="btn btn-success right" href="{% url 'add_eventdoctor' event.id %}"> Adicionar instructor </a>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member_med in eventmemberDC %}
+                    <tr role="row">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ member_med.medico.nombre_medico }} {{ member_med.medico.apellido_medico }}</td>
+                        <td>{{ member_med.medico.cedula_medico }}</td>
+                        
+                        <td>
+                            <a class="btn btn-danger" href="{% url 'remove_eventDC' member_med.id %}">Remover</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="clearfix">
+                <h4 class="left">Colaborador</h4>
+                <a class="btn btn-success right" href="{% url 'add_eventmember' event.id %}"> Adicionar colaborador </a>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Email</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member_pac in eventmember %}
+                    <tr role="row">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ member_pac.paciente.name }} {{ member_pac.paciente.apellido }}</td>
+                        <td>{{ member_pac.paciente.documento }}</td>
+                        <td>{{ member_pac.paciente.email }}</td>
+                        <td>
+                            <a class="btn btn-danger" href="{% url 'remove_event' member_pac.id %}">Remover</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ul>
+{% endblock %}
