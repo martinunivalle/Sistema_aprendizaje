@@ -27,7 +27,7 @@ SECRET_KEY = 'i+0pwgg+vgf=d)s-o0_aqpv#+&-xdv@w$#dv)ybpb+r9qvr*(g'
 GOOGLE_RECAPTCHA_SECRET_KEY = '6Le9fpsbAAAAAP77FLoKws9GK8M-LKZMFlD0Vxyq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'plataformacf.herokuapp.com']
 

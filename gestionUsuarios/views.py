@@ -76,95 +76,6 @@ class Index(TemplateView):
     template_name = 'principal/index.html'
 
 
-def medico_inf(request):
-    model = instructor_datos.objects.all()
-    paginator = Paginator(model, 10)
-    pagina = request.GET.get('page') or 1
-    posts = paginator.get_page(pagina)
-    pagina_actual = int(pagina)
-    paginas = range(1, posts.paginator.num_pages+1)
-    return render(request, 'historia/consulta/consulta_medico.html', {'base': model, 'page': posts, 'paginas': paginas, 'pagina_actual': pagina_actual})
-
-
-def seleccion_paciente(request):
-    global GLOBAL_Entry
-    if request.method == "POST":
-        GLOBAL_Entry = request.POST['Input']
-        print(GLOBAL_Entry)
-        return redirect('interrogatorio')
-    return render(request, "historia/paciente/seleccion.html", {'global': GLOBAL_Entry})
-
-
-# ----------------------------------------------------------------
-# CREAR INFORMACION instructor
-@login_required
-class FormMedico(request.HttpRequest):
-    def formulario_instructor(request):
-        if request.method == 'POST':
-            form = instructor_principal(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('instructor_datos')
-        else:
-            form = instructor_principal()
-        return render(request, 'historia/personal/medico.html', {'form': form, "mensaje": 'OK'})
-
-
-@login_required
-class FormMedico_datos(request.HttpRequest):
-    def formulario_instructor_datos(request):
-        if request.method == 'POST':
-            form = instructor_informacion(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('instructor_info')
-        else:
-            form = instructor_informacion()
-        return render(request, 'historia/personal/medico_datos.html', {'form': form, "mensaje": 'OK'})
-
-
-@login_required
-class Create_inf_medico(request.HttpRequest):
-    def crear_medico(request):
-        if request.method == 'POST':
-            form = instructor_principal(request.POST)
-            if form.is_valid():
-                form.save()
-            return redirect('instructor_info')
-        else:
-            form = instructor_principal()
-        return render(request, 'historia/crear/crear_consulta_medico.html', {'form': form})
-# EDITAR INFORMACION
-
-def editar_inf_medico(request, id):
-    form = None
-    error = None
-    try:
-        ant = instructor.objects.get(id=id)
-        if request.method == 'GET':
-            form = instructor_principal(instance=ant)
-        else:
-            form = instructor_principal(request.POST, instance=ant)
-            if form.is_valid():
-                form.save()
-            return redirect('instructor_info')
-    except ObjectDoesNotExist as e:
-        error = e
-    return render(request, 'historia/editar/ed_consulta_medico.html', {'form': form, 'error': error})
-# ELIMINAR INFORMACION
-
-
-def Eliminated_inf_medico(request, id):
-    error = None
-    try:
-        ant = instructor.objects.get(id=id)
-        if request.method == 'POST':
-            ant.delete()
-            return redirect('instructor_info')
-    except ObjectDoesNotExist as e:
-        error = e
-    return render(request, 'historia/borrar/delete_consulta_medico.html', {'ant': ant, 'error': error})
-
 class RegistrationView(CreateView):
     template_name = 'usuarios/registro.html'
     form_class = RegistrationForm
@@ -185,10 +96,11 @@ class RegistrationView(CreateView):
 
 
 class ProfileView(UpdateView):
-    model = colaborador
+    #model = colaborador
     fields = ['name', 'apellidos', 'documento', 'email', 'direccion',
-              'fecha_nacimiento', 'tipo_sangre', 'sexo', 'estado_civil', 'phone', 'picture']
+             'fecha_nacimiento', 'tipo_sangre', 'sexo', 'estado_civil', 'phone', 'picture']
     template_name = 'usuarios/perfil.html'
+    #form_class=UserChangeForm
 
     def get_success_url(self):
         return reverse('inicio')
@@ -221,8 +133,6 @@ def next_month(d):
     return month
 
 # ---------------------------------------------------------------
-
-
 class CalendarView(LoginRequiredMixin, generic.ListView):
     global member
     global memberDC

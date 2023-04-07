@@ -23,8 +23,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='usuarios/logout.html'), name='logout'),
     path("password_reset/", views.password_reset_request, name="password_reset"),
 
-    path('seleccion/', views.seleccion_paciente, name="seleccion"),
-
     path('calendario', views.CalendarView.as_view(), name='calendar'),
     path('event/new/', views.create_event, name='event_new'),
     path('event/<int:event_id>',views.event_delete, name="remove"),
@@ -35,13 +33,8 @@ urlpatterns = [
     path('event/remove/<int:pk>/',views.EventMemberDeleteView.as_view(), name="remove_event"),
     path('eventDC/remove/<int:pk>/',views.EventMemberDeleteViewDC.as_view(), name="remove_eventDC"),
 
-    path('historia/medico/crear_medico/', views.Create_inf_medico.crear_medico, name="cr_consulta_medico"),
-    path('historia/medico/editar_medico/<int:id>', views.editar_inf_medico, name="ed_consulta_medico"),
-    path('historia/medico/eliminar_medico/<int:id>', views.Eliminated_inf_medico, name="eliminar_consulta_medico"),
-
     path('jsi18n', JavaScriptCatalog.as_view(), name='js-catlog'),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('images/favicon.ico'))),
-
     
     path('home/',home.home,name='home'),
     path('landing_page/',home.landing_page,name='landing_page'),
