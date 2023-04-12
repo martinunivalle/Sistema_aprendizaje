@@ -31,6 +31,7 @@
                 {% endif %}                
             </div>
             <hr>
+            {% if request.user.is_superuser %}
             <div class="clearfix">
                 <h4 class="left">Instructor</h4>
                 <a class="btn btn-success right" href="{% url 'add_eventdoctor' event.id %}"> Adicionar instructor </a>
@@ -86,6 +87,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% endif %}
         </div>
     </div>
 </ul>
