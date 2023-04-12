@@ -10,10 +10,12 @@
             <div class="clearfix">
                 <a class="btn btn-primary left" href="{% url 'calendar' %}"> Calendario </a>
                 {% if event.cita_cumplida == True %}
-                <a class="btn btn-warning left" href="{% url 'factura'  %}"> Facturar </a>
+                <a class="btn btn-warning left" href="{% url 'inicio'  %}"> Salir </a>
                 {% endif %} 
+                {% if request.user.is_superuser %}
                 <a class="btn btn-primary right" href="{% url 'event_edit' event.pk %}"> Editar clase </a>
                 <a class="btn btn-danger right" href="{% url 'remove' event.id %}">Borrar clase</a>
+                {% endif %}
             </div>
             <div class="clearfix">
                 <p style="background-color:rgb(255, 0, 0); color: rgb(255, 255, 255); text-align: center;">DATOS DE LA
